@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>코칭 비용은 선불입니다</title>
     <style>
         :root {
@@ -19,7 +19,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
 
         body {
@@ -34,12 +34,11 @@
         /* 모바일 프레임 컨테이너 */
         .mobile-container {
             width: 100%;
-            max-width: 420px;
-            height: 100vh;
-            max-height: 896px;
+            max-width: 480px;
+            min-height: 100vh;
             background-color: var(--bg-color);
             position: relative;
-            overflow-y: auto;
+            overflow-y: visible;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
@@ -412,31 +411,66 @@
             margin-bottom: 10px;
         }
 
-        .command-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        /* 명령어 카드형 스타일 (버튼 + 설명 서술) */
+        .command-list {
+            display: flex;
+            flex-direction: column;
             gap: 8px;
         }
 
-        .command-btn {
+        .command-item {
             background: var(--bg-color);
             border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 10px 12px;
-            border-radius: 8px;
+            border-radius: 10px;
+            padding: 12px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+        }
+
+        .command-item:hover {
+            border-color: var(--primary-color);
+        }
+
+        .command-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .command-name {
             font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .command-desc {
+            font-size: 11px;
+            color: var(--text-sub);
+        }
+
+        .command-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
-            text-align: left;
+            white-space: nowrap;
             transition: all 0.2s;
         }
 
         .command-btn:hover {
+            background: var(--primary-color);
+            color: #1e1e24;
             border-color: var(--primary-color);
-            color: var(--primary-color);
         }
 
-        /* 7. PLATFORM · 플랫폼 연결 (마우스 오버 효과만 적용) */
+        /* 7. PLATFORM · 플랫폼 연결 */
         .platform-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -460,12 +494,7 @@
             transition: all 0.25s ease;
         }
 
-        .platform-btn.active {
-            color: var(--text-main);
-        }
-
-        /* 마우스 오버(Hover) 효과만 부드럽게 추가 */
-        .platform-btn.active:hover {
+        .platform-btn:hover {
             border-color: var(--primary-color);
             background: #23232b;
             color: var(--primary-color);
@@ -478,7 +507,7 @@
             font-weight: 400;
         }
 
-        .platform-btn.active:hover .platform-status {
+        .platform-btn:hover .platform-status {
             color: var(--primary-color);
         }
 
@@ -508,6 +537,33 @@
         .footer-brand {
             color: var(--text-sub);
         }
+    
+        /* 공통 랜딩 상단 메뉴 */
+        html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+        :root[data-theme="light"] {
+            --primary-color:#7163c8; --text-main:#252331; --text-sub:#635f70;
+            --bg-color:#f8f7fb; --card-bg:#fff; --border-color:#dedce8;
+        }
+        .top-bar { height:52px; padding:0 14px; }
+        .header-actions { display:flex; align-items:center; gap:6px; }
+        .header-icon { display:grid; place-items:center; width:38px; height:40px; padding:0; border:0; background:none; color:var(--text-main); font:400 22px/1 sans-serif; cursor:pointer; text-decoration:none; }
+        .top-menu { display:none; position:absolute; top:52px; left:0; right:0; background:var(--card-bg); border-bottom:1px solid var(--border-color); padding:8px 20px 16px; box-shadow:0 14px 22px rgba(0,0,0,.2); }
+        .top-menu.open { display:block; }
+        .top-menu a { display:block; color:var(--text-main); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--border-color); font-size:14px; }
+        .top-menu a:hover,.top-menu a:focus-visible { color:var(--primary-color); }
+        .top-menu small { color:var(--text-sub); margin-left:6px; }
+        .author { padding:16px 0; border-bottom:1px solid var(--border-color); }
+        .author-title { font-size:15px; margin-bottom:8px; }
+        .author p { font-size:13px; color:var(--text-sub); line-height:1.8; }
+        footer { padding:28px 20px 36px; margin-top:8px; background:var(--bg-color); font-size:12px; }
+        footer .credit { margin-top:10px; line-height:1.7; }
+        .ep-card { min-width:220px; max-width:220px; gap:10px; border-style:solid; }
+        .ep-desc { font-size:12px; color:var(--text-sub); line-height:1.6; }
+        .episodes-slider { scrollbar-width:thin; }
+        .command-btn.copied { border-color:var(--primary-color); color:var(--primary-color); }
+        :root[data-theme="light"] .kakao-chat-box { background:#edebf4; }
+        :root[data-theme="light"] .tag { background:#f8f7fb; }
+        :root[data-theme="light"] .speech-bubble-sm { background:#f8f7fb; color:#252331; }
     </style>
 </head>
 <body>
@@ -515,16 +571,22 @@
     <div class="mobile-container">
         
         <!-- 1. 상단 바 -->
-        <div class="top-bar">
-            <div class="top-bar-left">
-                <button class="icon-btn">☰</button>
-            </div>
-            <div class="top-bar-right">
-                <button class="icon-btn">✕</button>
-                <button class="icon-btn">✉</button>
-                <button class="icon-btn">◐</button>
-            </div>
-        </div>
+        <header class="top-bar">
+            <button class="header-icon" id="menuBtn" type="button" aria-label="페이지 메뉴" aria-controls="menu" aria-expanded="false">☰</button>
+            <nav class="header-actions" aria-label="연락처 및 화면 설정">
+                <a class="header-icon" href="https://x.com/almondsongsong" aria-label="아몬드송송 X" target="_blank" rel="noopener noreferrer">𝕏</a>
+                <a class="header-icon" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=almondsongsong%40gmail.com" aria-label="이메일" target="_blank" rel="noopener noreferrer">✉</a>
+                <button class="header-icon" id="themeBtn" type="button" aria-label="라이트 모드로 변경">◐</button>
+            </nav>
+            <nav class="top-menu" id="menu" aria-label="작품 페이지 메뉴">
+                <div class="author"><div class="author-title">작가 소개</div><p>당신이 주인공이 되는 다채로운 서사의 세계,<br>AI채팅 크리에이터 아몬드송송 입니다.</p></div>
+                <a href="#story">STORY<small>세계관</small></a>
+                <a href="#characters">CHARACTERS<small>캐릭터 소개</small></a>
+                <a href="#episodes">EPISODES<small>에피소드</small></a>
+                <a href="#play">PLAY GUIDE<small>추천 플레이 + 명령어</small></a>
+                <a href="#platform">PLATFORM<small>플랫폼 연결</small></a>
+            </nav>
+        </header>
 
         <!-- 2. HERO 영역 (카톡 메신저 스타일) -->
         <section class="hero-section">
@@ -553,7 +615,7 @@
         </section>
 
         <!-- 3. STORY · 의뢰서 -->
-        <section class="section">
+        <section class="section" id="story">
             <div class="section-header">
                 <div class="section-subtitle">Story · 세계관</div>
                 <h2 class="section-title">20년 지기에게 온 연애 상담</h2>
@@ -584,7 +646,7 @@
         </section>
 
         <!-- 4. CHARACTERS · 캐릭터 소개 -->
-        <section class="section">
+        <section class="section" id="characters">
             <div class="section-header">
                 <div class="section-subtitle">Characters · 캐릭터 소개</div>
                 <h2 class="section-title">의뢰인과 코치</h2>
@@ -614,52 +676,23 @@
         </section>
 
         <!-- 5. EPISODES · 에피소드 스와이프 -->
-        <section class="section">
+        <section class="section" id="episodes">
             <div class="section-header">
                 <div class="section-subtitle">Episodes · 에피소드</div>
                 <h2 class="section-title">코칭은 이렇게 이어져요</h2>
             </div>
-            <div class="episodes-slider">
-                <div class="ep-card">
-                    <div>
-                        <div class="ep-number">EP 01</div>
-                        <div class="ep-title">코칭 비용은 선불입니다</div>
-                    </div>
-                    <span class="ep-tag">연애 코칭 의뢰</span>
-                </div>
-                <div class="ep-card">
-                    <div>
-                        <div class="ep-number">EP 02</div>
-                        <div class="ep-title">친구를 좋아하면 어떻게 해?</div>
-                    </div>
-                    <span class="ep-tag">오래된 친구의 감정</span>
-                </div>
-                <div class="ep-card">
-                    <div>
-                        <div class="ep-number">EP 03</div>
-                        <div class="ep-title">코칭대로 해봤어</div>
-                    </div>
-                    <span class="ep-tag">실전 적용</span>
-                </div>
-                <div class="ep-card">
-                    <div>
-                        <div class="ep-number">EP 04</div>
-                        <div class="ep-title">연습 상대는 너</div>
-                    </div>
-                    <span class="ep-tag">연습</span>
-                </div>
-                <div class="ep-card">
-                    <div>
-                        <div class="ep-number">EP 05 ~ 06</div>
-                        <div class="ep-title">결말 및 에필로그 (비공개)</div>
-                    </div>
-                    <span class="ep-tag">스포일러 방지</span>
-                </div>
+            <div class="episodes-slider" tabindex="0" aria-label="에피소드 좌우 스크롤">
+                <article class="ep-card"><div><div class="ep-number">EP 01</div><div class="ep-title">코칭 비용은 선불입니다</div><p class="ep-desc">20년 지기 소꿉친구 한준휘가 좋아하는 사람이 생겼다며 연애 코칭을 부탁한다. 친구에게도 상담비를 받을지 농담이 오가지만 그의 태도는 진지하다.</p></div></article>
+                <article class="ep-card"><div><div class="ep-number">EP 02</div><div class="ep-title">친구를 좋아하면 어떻게 해?</div><p class="ep-desc">준휘는 좋아하는 사람이 오래 알고 지낸 친구라고 털어놓는다. 고백했다가 편한 관계를 잃을까 두렵다며 친구에서 연인이 되는 일을 어떻게 생각하는지 묻는다.</p></div></article>
+                <article class="ep-card"><div><div class="ep-number">EP 03</div><div class="ep-title">코칭대로 해봤어</div><p class="ep-desc">준휘가 당신에게 들은 조언을 실천하려 한다. 먼저 연락하고 식사를 제안하는 그의 행동에서 익숙했던 다정함이 조금 다른 의미로 다가온다.</p></div></article>
+                <article class="ep-card"><div><div class="ep-number">EP 04</div><div class="ep-title">연습 상대는 너</div><p class="ep-desc">준휘가 연애 상황을 연습해 보고 싶다며 상대가 되어 달라고 부탁한다. 익숙한 식사나 영화도 데이트 연습이라 부르면 다르게 느껴질까?</p></div></article>
+                <article class="ep-card"><div><div class="ep-number">EP 05</div><div class="ep-title">그때 하지 못한 말</div><p class="ep-desc">연애 이야기는 두 사람이 함께 공부하던 학창 시절과 대학 시절로 이어진다. 준휘는 오래 기억한 말을 꺼내며 그때 하지 못했던 질문을 건넨다.</p></div></article>
+                <article class="ep-card"><div><div class="ep-number">EP 06</div><div class="ep-title">마지막 코칭</div><p class="ep-desc">상담을 통해 많은 이야기를 나눈 준휘가 마지막 질문을 건넨다. 친구로 남을지, 관계를 바꿀지는 두 사람의 선택에 달려 있다.</p></div></article>
             </div>
         </section>
 
         <!-- 6. PLAY GUIDE · 추천 플레이와 명령어 -->
-        <section class="section">
+        <section class="section" id="play">
             <div class="section-header">
                 <div class="section-subtitle">Play Guide · 추천 플레이</div>
                 <h2 class="section-title">어떻게 코칭해 줄래?</h2>
@@ -671,7 +704,7 @@
                 </div>
                 <div class="guide-item">
                     <div class="guide-item-title">친구처럼 장난치기</div>
-                    <div class="guide-item-desc">선불, 친구 할인 드립으로 유쾌하게 티키타카를 나눈다.</div>
+                    <div class="guide-item-desc">선불, 친구 할인 드립으로 유쾌한 티키타카를 나눈다.</div>
                 </div>
                 <div class="guide-item">
                     <div class="guide-item-title">마음을 먼저 확인하기</div>
@@ -679,51 +712,108 @@
                 </div>
             </div>
 
-            <div class="command-title">명령어 안내 (탭하여 복사)</div>
-            <div class="command-grid">
-                <button class="command-btn" onclick="alert('명령어가 복사되었습니다!')">!상담시작 (준비중)</button>
-                <button class="command-btn" onclick="alert('명령어가 복사되었습니다!')">!할인요청 (준비중)</button>
-                <button class="command-btn" onclick="alert('명령어가 복사되었습니다!')">!상대추궁 (준비중)</button>
-                <button class="command-btn" onclick="alert('명령어가 복사되었습니다!')">!팩트폭행 (준비중)</button>
+            <div class="command-title">명령어 안내 (클릭 시 복사 및 내용 확인)</div>
+            <div class="command-list">
+                <div class="command-item">
+                    <div class="command-info">
+                        <span class="command-name">!코칭노트</span>
+                        <span class="command-desc">준휘의 비밀 코칭 노트와 진행도를 확인합니다.</span>
+                    </div>
+                    <button class="command-btn" onclick="alert('[!코칭노트] 명령어가 복사되었습니다!\n준휘의 비밀 코칭 노트를 확인합니다.')">복사하기</button>
+                </div>
+                <div class="command-item">
+                    <div class="command-info">
+                        <span class="command-name">!속마음</span>
+                        <span class="command-desc">말과는 다른 준휘의 숨겨진 속마음 플래그를 엽니다.</span>
+                    </div>
+                    <button class="command-btn" onclick="alert('[!속마음] 명령어가 복사되었습니다!\n준휘의 숨겨진 속마음 플래그를 열어봅니다.')">복사하기</button>
+                </div>
+                <div class="command-item">
+                    <div class="command-info">
+                        <span class="command-name">!이벤트</span>
+                        <span class="command-desc">두 사람 사이의 특별한 돌발 상황을 발생시킵니다.</span>
+                    </div>
+                    <button class="command-btn" onclick="alert('[!이벤트] 명령어가 복사되었습니다!\n두 사람의 특별한 돌발 이벤트가 발생합니다.')">복사하기</button>
+                </div>
             </div>
         </section>
 
         <!-- 7. PLATFORM · 플랫폼 연결 -->
-        <section class="section">
+        <section class="section" id="platform">
             <div class="section-header">
                 <div class="section-subtitle">Platform · 플랫폼 연결</div>
-                <h2 class="section-title">어디서 만날까요</h2>
+                <h2 class="section-title">한준휘 코칭하러 가기</h2>
             </div>
             <div class="platform-grid">
-                <div class="platform-btn">
+                <a href="#" class="platform-btn">
                     유니챗
-                    <span class="platform-status">준비 중</span>
-                </div>
-                <div class="platform-btn">
-                    크랙
-                    <span class="platform-status">준비 중</span>
-                </div>
-                <a href="#" class="platform-btn active">
-                    티키타
-                    <span class="platform-status">플레이 가능 ↗</span>
+                    <!-- <span class="platform-status">준비 중</span> -->
                 </a>
-                <a href="#" class="platform-btn active">
+                <a href="#" class="platform-btn">
+                    크랙
+                    <!-- <span class="platform-status">준비 중</span> -->
+                </a>
+                <a href="#" class="platform-btn">
+                    티키타
+                    <!-- <span class="platform-status">플레이 가능 ↗</span> -->
+                </a>
+                <a href="#" class="platform-btn">
                     케이브덕
-                    <span class="platform-status">플레이 가능 ↗</span>
+                    <!-- <span class="platform-status">플레이 가능 ↗</span> -->
                 </a>
             </div>
         </section>
 
         <!-- 8. 푸터 영역 -->
         <footer>
-            <div class="footer-copyright">© 2026 아몬드송송</div>
-            <div class="footer-notice">
-                세계관, 캐릭터 설정, 스토리, 창작 요소, HTML 구조, 레이아웃, 디자인의 무단 복제·도용·변형·재배포를 금지합니다.
-            </div>
-            <div class="footer-brand">Original Story & Creative Design by 아몬드송송</div>
+            <p class="credit">© 2026 아몬드송송 · ALL RIGHTS RESERVED<br>
+            본 작품의 세계관·캐릭터 설정·스토리·창작 요소 및<br>
+            HTML 구조 · 레이아웃 · 디자인의<br>
+            무단 복제, 도용, 변형 및 재배포를 금합니다.</p>
+            <p class="credit">Original Story &amp; Creative Design by 🤎⋆ ˚｡⋆୨୧아몬드송송୨୧⋆｡˚ ⋆🤎</p>
         </footer>
 
     </div>
 
+<script>
+(() => {
+  const menu = document.getElementById('menu');
+  const menuBtn = document.getElementById('menuBtn');
+  menuBtn.addEventListener('click', () => {
+    const expanded = menu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(expanded));
+  });
+  menu.addEventListener('click', e => {
+    if (e.target.closest('a')) {
+      menu.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+    }
+  });
+  const themeBtn = document.getElementById('themeBtn');
+  function syncTheme() {
+    themeBtn.setAttribute('aria-label', document.documentElement.dataset.theme === 'light' ? '다크 모드로 변경' : '라이트 모드로 변경');
+  }
+  try { document.documentElement.dataset.theme = localStorage.getItem('coaching-theme') === 'light' ? 'light' : 'dark'; } catch(e) {}
+  themeBtn.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('coaching-theme',next); } catch(e) {}
+    syncTheme();
+  });
+  syncTheme();
+  document.querySelectorAll('.command-item').forEach(item => {
+    const btn = item.querySelector('.command-btn');
+    const cmd = item.querySelector('.command-name').textContent.trim();
+    btn.removeAttribute('onclick');
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(cmd);
+        btn.classList.add('copied'); btn.textContent='복사됨';
+        setTimeout(() => { btn.classList.remove('copied'); btn.textContent='복사하기'; }, 1100);
+      } catch(e) { btn.textContent='복사 실패'; setTimeout(() => btn.textContent='복사하기', 1300); }
+    });
+  });
+})();
+</script>
 </body>
 </html>
