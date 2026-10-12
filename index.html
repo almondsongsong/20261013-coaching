@@ -538,6 +538,9 @@
             color: var(--text-sub);
         }
     
+        .model-recommendation { display:flex; align-items:center; gap:10px; margin:0 0 20px; padding:16px 15px; border:1px solid var(--primary-color); border-radius:12px; background:color-mix(in srgb, var(--primary-color) 14%, var(--card-bg)); color:var(--text-main); box-shadow:0 0 20px color-mix(in srgb, var(--primary-color) 13%, transparent); font-size:14px; line-height:1.6; }
+        .model-recommendation strong { font-weight:800; }
+        .model-rec-icon { font-size:19px; color:var(--primary-color); flex-shrink:0; }
         /* 공통 랜딩 상단 메뉴 */
         html { scroll-behavior: smooth; scroll-padding-top: 60px; }
         :root[data-theme="light"] {
@@ -599,7 +602,7 @@
                     <span>한준휘</span>
                 </div>
                 <div class="kakao-bubble">좋아하는 사람이 생겼어.</div>
-                <div class="kakao-bubble-second">{{user}}, 네가 좀 가르쳐 줘.</div>
+                <div class="kakao-bubble-second">네가 좀 가르쳐 줘.</div>
                 <div class="typing-indicator">
                     <div class="typing-dot"></div>
                     <div class="typing-dot"></div>
@@ -628,7 +631,7 @@
                 </div>
                 <div class="request-item">
                     <span class="label">담당</span>
-                    <span class="value">{{user}}</span>
+                    <span class="value">당신</span>
                 </div>
                 <div class="request-item">
                     <span class="label">관계</span>
@@ -663,7 +666,7 @@
                 <div class="char-card">
                     <div class="char-img-placeholder">3:4 유저 카드</div>
                     <div class="char-info">
-                        <div class="char-name">{{user}}</div>
+                        <div class="char-name">당신</div>
                         <div class="char-spec">코치</div>
                         <div class="char-desc">성격과 관계는 자유롭게.</div>
                     </div>
@@ -697,6 +700,7 @@
                 <div class="section-subtitle">Play Guide · 추천 플레이</div>
                 <h2 class="section-title">어떻게 코칭해 줄래?</h2>
             </div>
+            <div class="model-recommendation" role="note"><span class="model-rec-icon">✦</span><span><strong>Flash 3.8 &amp; Pro2.5 모델 이상 추천합니다!</strong></span></div>
             <div class="play-guide-list">
                 <div class="guide-item">
                     <div class="guide-item-title">전문가처럼 상담하기</div>
