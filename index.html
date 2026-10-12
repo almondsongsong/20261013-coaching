@@ -326,6 +326,7 @@
             color: var(--text-main);
         }
 
+        .char-img-placeholder img { display:block;width:100%;height:100%;object-fit:cover; }
         /* 5. EPISODES · 에피소드 스와이프 */
         .episodes-slider {
             display: flex;
@@ -538,9 +539,10 @@
             color: var(--text-sub);
         }
     
-        .model-recommendation { display:flex; align-items:center; gap:10px; margin:0 0 20px; padding:16px 15px; border:1px solid var(--primary-color); border-radius:12px; background:color-mix(in srgb, var(--primary-color) 14%, var(--card-bg)); color:var(--text-main); box-shadow:0 0 20px color-mix(in srgb, var(--primary-color) 13%, transparent); font-size:14px; line-height:1.6; }
-        .model-recommendation strong { font-weight:800; }
-        .model-rec-icon { font-size:19px; color:var(--primary-color); flex-shrink:0; }
+        .recommend-model-box { background:linear-gradient(135deg,rgba(162,155,254,.12),rgba(162,155,254,.03));border:2px solid var(--primary-color);border-radius:12px;padding:16px;margin-bottom:16px;box-shadow:0 4px 15px rgba(162,155,254,.15); }
+        .recommend-model-title { font-size:13px;font-weight:800;color:var(--primary-color);margin-bottom:6px;display:flex;align-items:center;gap:6px; }
+        .recommend-model-desc { font-size:12px;color:var(--text-main);line-height:1.4; }
+        .recommend-model-desc strong { font-weight:800; }
         /* 공통 랜딩 상단 메뉴 */
         html { scroll-behavior: smooth; scroll-padding-top: 60px; }
         :root[data-theme="light"] {
@@ -656,7 +658,7 @@
             </div>
             <div class="char-grid">
                 <div class="char-card">
-                    <div class="char-img-placeholder">3:4 이미지</div>
+                    <div class="char-img-placeholder"><img src="assets/char.png" alt="한준휘 캐릭터 이미지" loading="lazy"></div>
                     <div class="char-info">
                         <div class="char-name">한준휘</div>
                         <div class="char-spec">31세 · 183cm</div>
@@ -664,7 +666,7 @@
                     </div>
                 </div>
                 <div class="char-card">
-                    <div class="char-img-placeholder">3:4 유저 카드</div>
+                    <div class="char-img-placeholder"><img src="assets/user.png" alt="당신의 캐릭터 이미지" loading="lazy"></div>
                     <div class="char-info">
                         <div class="char-name">당신</div>
                         <div class="char-spec">코치</div>
@@ -700,7 +702,10 @@
                 <div class="section-subtitle">Play Guide · 추천 플레이</div>
                 <h2 class="section-title">어떻게 코칭해 줄래?</h2>
             </div>
-            <div class="model-recommendation" role="note"><span class="model-rec-icon">✦</span><span><strong>Flash 3.8 &amp; Pro2.5 모델 이상 추천합니다!</strong></span></div>
+            <div class="recommend-model-box" role="note">
+                <div class="recommend-model-title">✨ 추천 모델 안내</div>
+                <div class="recommend-model-desc">더욱 몰입감 있는 대화를 위해 <strong>Flash 3.8 &amp; Pro2.5</strong> 모델 이상 사용을 권장합니다.</div>
+            </div>
             <div class="play-guide-list">
                 <div class="guide-item">
                     <div class="guide-item-title">전문가처럼 상담하기</div>
